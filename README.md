@@ -30,5 +30,21 @@ NAVERWORKS_TEST_USER_ID=37****-3***-4***-18**-033******# 네이버웍스 메시�
 ## 테스트
 설정값을 제대로 입력했다면 테스트를 통해 확인할 수 있습니다.
 ```bash
- vender/bin/phpunit tests
+ vendor/bin/phpunit tests
+```
+
+## 사용법
+### 메시지 전송
+```php
+    // 인증을 받아 엑세스토큰을 받아온 클라이언트를 생성합니다.
+    $auth = new NaverWorksAuthorization(
+        $_ENV['NAVERWORKS_CLIENT_ID'],
+        $_ENV['NAVERWORKS_CLIENT_SECRET'],
+        $_ENV['NAVERWORKS_SERVICE_ACCOUNT'],
+        $path.$_ENV['NAVERWORKS_PRIVATE_KEY_PATH']
+    );
+    
+    $bot = new ChatBot($_ENV['NAVERWORKS_BOT_ID'], $auth->createApiClient());
+    $bot->to($_ENV['NAVERWORKS_TEST_USER_ID']);
+    $bot->sendMessageToUser('test message');
 ```
